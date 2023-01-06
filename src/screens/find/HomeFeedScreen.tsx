@@ -24,23 +24,23 @@ const HomeFeedScreen = ({ navigation }: any) => {
 
     return (
         <SafeAreaView>
-            <ScrollView>
-                <View style={{ margin: 2.5, paddingHorizontal: 3, width: "100%" }}>
-                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                        <Text variant="titleMedium">Games near you</Text>
-                        <TouchableOpacity onPress={() => setIsActiveFilter(!isActiveFilter)}>
-                            <Ionicons name="funnel" size={24} color="black" />
-                        </TouchableOpacity>
-                    </View>
-                    {homeFeedMockData.map((item) => (
-                        <GameCard
-                            item={item}
-                            navigation={navigation}
-                            direction="column"
-                            key={item.id}
-                        />
-                    ))}
+            <ScrollView style={{ width: "100%", paddingHorizontal: 15 }}>
+
+                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                    <Text variant="headlineMedium" style={{ fontWeight: "bold", marginBottom: 15 }}>Games near you</Text>
+                    <TouchableOpacity onPress={() => setIsActiveFilter(!isActiveFilter)}>
+                        <Ionicons name="funnel" size={24} color="purple" />
+                    </TouchableOpacity>
                 </View>
+                {homeFeedMockData.map((item) => (
+                    <GameCard
+                        item={item}
+                        navigation={navigation}
+                        direction="column"
+                        key={item.id}
+                    />
+                ))}
+
                 <Filter
                     active={isActiveFilter}
                     onFilterClick={(value) => setIsActiveFilter(value)}

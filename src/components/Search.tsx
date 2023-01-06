@@ -28,7 +28,7 @@ const Search = () => {
     }
 
     return (
-        <View style={{ marginHorizontal: 3, marginVertical: 5 }}>
+        <View style={{ marginHorizontal: 15, marginTop: 50, marginBottom: 15 }}>
             <Text style={{ fontWeight: "bold", marginTop: 5 }}>Select your address</Text>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <TextInput
