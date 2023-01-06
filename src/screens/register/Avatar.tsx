@@ -128,7 +128,7 @@ export default function Avatar({ navigation }: any) {
                             {!preview && (
                                 <Button
                                     onPress={register}
-                                    icon={'arrow-right-alt'}
+                                    icon={'arrow-forward'}
                                     buttonColor={primaryColor}
                                 >Later</Button>
                             )}

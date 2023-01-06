@@ -94,14 +94,12 @@ const GameScreen = ({ route, navigation }: any) => {
                 <View
                     style={{ flexDirection: "row", marginBottom: 4, width: "100%", justifyContent: "space-around" }}
                 >
-                    <Button
-                        icon={'event'}
-                        onPress={() => console.log('Play now')}
-                    >Play now</Button>
-                    <Button
-                        icon={'event'}
-                        onPress={() => console.log('Book')}
-                    >Book</Button>
+                    <TouchableOpacity onPress={() => console.log('Play now')}>
+                        <InlineTextIcon icon={'happy'} text={'Play now'} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => console.log('Book')}>
+                        <InlineTextIcon icon={'book'} text={'Book'} />
+                    </TouchableOpacity>
                 </View>
 
                 {/* render 'they loved playing it' */}

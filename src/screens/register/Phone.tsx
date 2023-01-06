@@ -132,7 +132,7 @@ export default function Phone({ navigation }: any) {
                     >
                         <Button
                             onPress={register}
-                            icon={'arrow-right-alt'}
+                            icon={'arrow-forward'}
                             disabled={isInputInValid}
                             buttonColor={primaryColor}
                         >Next</Button>

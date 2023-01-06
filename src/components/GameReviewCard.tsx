@@ -1,39 +1,41 @@
 import React from "react";
 import findRoutes from "../navigation/appRoutes/findRoutes";
-import { Dimensions, View, Image, StyleSheet } from 'react-native';
+import { Dimensions, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 
 const GameReviewCard = ({ item, navigation, direction }: any) => {
     return (
-        <View
-            style={[
-                styles.card, direction === 'row' ? styles.rowCard : styles.colCard
-            ]}
-            onTouchEnd={() => navigation.navigate(findRoutes.GAME_SCREEN, { item })}
-        >
-            <View>
-                <View
+        <TouchableOpacity onPress={() => navigation.navigate(findRoutes.GAME_SCREEN, { item })}>
+            <View
+                style={[
+                    styles.card, direction === 'row' ? styles.rowCard : styles.colCard
+                ]}
 
-                    style={[direction === 'row' ? styles.rowImg : styles.colImg]}
-                >
-                    <Image resizeMode="cover" source={{
-                        uri: item.avatar
-                    }} />
-                </View>
-            </View>
-            <View style={styles.content}>
-                <View style={{ margin: 2 }}>
-                    <Text variant="titleLarge">
-                        {item.name}
-                    </Text>
-                </View>
+            >
                 <View>
-                    <Text style={{ fontWeight: "bold" }}>
-                        {item.description}
-                    </Text>
+                    <View
+
+                        style={[direction === 'row' ? styles.rowImg : styles.colImg]}
+                    >
+                        <Image resizeMode="cover" source={{
+                            uri: item.avatar
+                        }} />
+                    </View>
+                </View>
+                <View style={styles.content}>
+                    <View style={{ margin: 2 }}>
+                        <Text variant="titleLarge">
+                            {item.name}
+                        </Text>
+                    </View>
+                    <View>
+                        <Text style={{ fontWeight: "bold" }}>
+                            {item.description}
+                        </Text>
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 
 };

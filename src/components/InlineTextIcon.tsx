@@ -18,11 +18,11 @@ export const InlineTextIcon = ({ text, icon, inversed }: IInlineTextIcon) => {
             {inversed ? (
                 <>
                     <Text style={{ marginRight: 8 }}>{text}</Text>
-                    <Ionicons name={icon} color="orange" />
+                    <Ionicons name={icon} color="purple" size={24} />
                 </>
             ) : (
                 <>
-                    <Ionicons name={icon} color="orange" />
+                    <Ionicons name={icon} color="purple" size={24} />
                     <Text style={{ marginLeft: 8 }}>{text}</Text>
                 </>
             )}
