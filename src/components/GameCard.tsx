@@ -3,7 +3,6 @@ import findRoutes from "../navigation/appRoutes/findRoutes";
 import Tag from "./Tag";
 import { Dimensions, View, Image, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
-import { grey500 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 
 const GameCard = ({ item, navigation, direction }: any) => {
@@ -54,7 +53,6 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginRight: 5,
         overflow: 'hidden',
-        borderColor: grey500,
         borderWidth: 1
     },
     rowCard: {

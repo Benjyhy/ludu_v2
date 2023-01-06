@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from '@env';
 import { apiErrorResponse } from '../models/apiResponse';
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: 'API_URL',
 });
 
 // api.interceptors.request.use(

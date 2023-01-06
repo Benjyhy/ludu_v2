@@ -7,7 +7,6 @@ import StoreListing from "../../components/StoreListing";
 import * as RootNavigation from "../../navigation/rootNavigation";
 import { useSelector } from "react-redux";
 import { MainAppState } from "../../models/states";
-import { orange500, white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 
 function BookingGameScreen({ route, navigation }: any) {
@@ -39,14 +38,13 @@ function BookingGameScreen({ route, navigation }: any) {
                     style={{
                         alignItems: "center",
                         padding: 20,
-                        backgroundColor: orange500,
                         borderWidth: 3,
                         borderColor: "#545454",
                         borderRadius: 5,
                         borderStyle: "solid"
                     }}
                 >
-                    <Text style={{ fontWeight: "bold", fontSize: 30, color: white }}>
+                    <Text style={{ fontWeight: "bold", fontSize: 30 }}>
                         Booking for {gameName}
                     </Text>
                 </View>

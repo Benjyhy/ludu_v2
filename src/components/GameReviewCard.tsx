@@ -1,6 +1,5 @@
 import React from "react";
 import findRoutes from "../navigation/appRoutes/findRoutes";
-import { grey500 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 import { Dimensions, View, Image, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginRight: 5,
         overflow: 'hidden',
-        borderColor: grey500,
         borderWidth: 1
     },
     rowCard: {
