@@ -7,8 +7,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import appRoutes from '../navigation/appRoutes/index';
-import { TextInput } from 'react-native-paper';
-import { Button } from 'react-native-paper';
+import { TextInput, Button, ActivityIndicator, MD2Colors } from 'react-native-paper';
 import { errorColor, primaryColor } from '../utils/colors';
 import axios from '../utils/axios';
 import { useDispatch } from 'react-redux';
@@ -67,26 +66,26 @@ export default function Login({ navigation }: any) {
                             setPassword(text);
                         }}
                     />
-                    <Button onPress={login} text={'Login'} background={primaryColor} />
-                    <Box my={4}>
+                    <Button onPress={login} buttonColor={primaryColor}>Login</Button>
+                    <View style={{ marginVertical: 4 }}>
                         <TouchableOpacity
                             onPress={() => navigation.navigate(appRoutes.REGISTER_SCREEN)}
                         >
                             <Text style={styles.registerTextStyle}>Create an account</Text>
                         </TouchableOpacity>
-                    </Box>
-                    <Box justifyContent={'center'} alignItems={'center'}>
+                    </View>
+                    <View style={{ justifyContent: "center", alignItems: "center" }}>
                         {error && (
                             <>
                                 <Text style={{ color: errorColor }}>Wrong credentials</Text>
                             </>
                         )}
-                    </Box>
+                    </View>
                 </>
             )}
             {loading && (
                 <>
-                    <Spinner />
+                    <ActivityIndicator animating={true} color={MD2Colors.amber400} />
                 </>
             )}
         </View>

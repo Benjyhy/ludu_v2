@@ -1,4 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { SafeAreaView, ScrollView, View } from "react-native";
+import { Text, Button } from "react-native-paper"
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Calendar } from "react-native-calendars";
 import moment from "moment";
@@ -26,52 +28,52 @@ function DatePickerScreen({ route, navigation }: any) {
 
     const gameName = route.params.gameName;
     return (
-        <ScrollView>
-            <View marginTop={70} >
-                <View paddingX={8} alignItems="center" paddingTop={5}>
-                    <Heading>Booking for: {gameName}</Heading>
-                    <Text>
-                        at <Text fontWeight="bold">Game store name</Text>
-                    </Text>
-                </View>
-                <View marginTop={20}>
-                    <Calendar
-                        current={format}
-                        onDayPress={onDayPress}
-                        markedDates={marked}
-                        theme={{
-                            selectedDayBackgroundColor: '#545454',
-                            selectedDayTextColor: '#ffffff',
-                            arrowColor: '#545454',
-                            monthTextColor: '#545454',
-                            textDayHeaderFontWeight: '300',
-                        }}
-                    />
-                    <View alignItems="center" paddingTop={5}>
-                        <Text fontSize={15}>Date chosen:</Text>
-                        <Text fontWeight="bold" fontSize={18}>
-                            {moment(selected).format("DD/MM/YYYY")}
+        <SafeAreaView>
+            <ScrollView>
+                <View style={{ marginTop: 70 }}>
+                    <View style={{ paddingHorizontal: 8, alignItems: "center", paddingTop: 5 }}>
+                        <Text variant="titleMedium">Booking for: {gameName}</Text>
+                        <Text>
+                            at <Text style={{ fontWeight: "bold" }}>Game store name</Text>
                         </Text>
                     </View>
+                    <View style={{ marginTop: 20 }}>
+                        <Calendar
+                            current={format}
+                            onDayPress={onDayPress}
+                            markedDates={marked}
+                            theme={{
+                                selectedDayBackgroundColor: '#545454',
+                                selectedDayTextColor: '#ffffff',
+                                arrowColor: '#545454',
+                                monthTextColor: '#545454',
+                                textDayHeaderFontWeight: '300',
+                            }}
+                        />
+                        <View style={{ alignItems: "center", paddingTop: 5 }}>
+                            <Text>Date chosen:</Text>
+                            <Text style={{ fontWeight: "bold" }}>
+                                {moment(selected).format("DD/MM/YYYY")}
+                            </Text>
+                        </View>
+                    </View>
                 </View>
-            </View>
-            <Box width="100%" paddingTop={10}>
-                <Button
-                    width={80}
-                    background="#545454"
-                    borderRadius={5}
-                    alignSelf="center"
-                    onPress={() =>
-                        navigation.navigate(findRoutes.PERIOD_FEED, {
-                            date: moment(selected).format("DD/MM/YYYY"),
-                            gameName: gameName
-                        })
-                    }
-                >
-                    Continue
-                </Button>
-            </Box>
-        </ScrollView>
+                <View style={{ width: "100%", paddingTop: 10 }}>
+                    <Button
+                        buttonColor="#545454"
+                        style={{ width: 80, borderRadius: 5, alignSelf: "center" }}
+                        onPress={() =>
+                            navigation.navigate(findRoutes.PERIOD_FEED, {
+                                date: moment(selected).format("DD/MM/YYYY"),
+                                gameName: gameName
+                            })
+                        }
+                    >
+                        Continue
+                    </Button>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 

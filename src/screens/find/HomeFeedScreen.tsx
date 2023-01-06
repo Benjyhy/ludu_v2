@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import homeFeedMockData from '../../mocks/homeFeedMockData';
 import GameCard from '../../components/GameCard';
-//import Ionicons from '@expo/vector-icons/Ionicons';
-import { TouchableOpacity } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { TouchableOpacity, SafeAreaView, ScrollView, View } from 'react-native';
+import { Text } from 'react-native-paper';
 import Filter from '../../components/Filter';
 import { useSelector } from 'react-redux';
 import { MainAppState } from '../../models/states';
@@ -22,28 +23,30 @@ const HomeFeedScreen = ({ navigation }: any) => {
     }, [currentLocation]);
 
     return (
-        <ScrollView>
-            <VStack space={2.5} w="100%" px="3">
-                <Flex direction="row" justify="space-between">
-                    <Heading size="md">Games near you</Heading>
-                    <TouchableOpacity onPress={() => setIsActiveFilter(!isActiveFilter)}>
-                        <Ionicons name="ios-filter" size={24} color="black" />
-                    </TouchableOpacity>
-                </Flex>
-                {homeFeedMockData.map((item) => (
-                    <GameCard
-                        item={item}
-                        navigation={navigation}
-                        direction="column"
-                        key={item.id}
-                    />
-                ))}
-            </VStack>
-            <Filter
-                active={isActiveFilter}
-                onFilterClick={(value) => setIsActiveFilter(value)}
-            />
-        </ScrollView>
+        <SafeAreaView>
+            <ScrollView>
+                <View style={{ margin: 2.5, paddingHorizontal: 3, width: "100%" }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                        <Text variant="titleMedium">Games near you</Text>
+                        <TouchableOpacity onPress={() => setIsActiveFilter(!isActiveFilter)}>
+                            <Ionicons name="funnel" size={24} color="black" />
+                        </TouchableOpacity>
+                    </View>
+                    {homeFeedMockData.map((item) => (
+                        <GameCard
+                            item={item}
+                            navigation={navigation}
+                            direction="column"
+                            key={item.id}
+                        />
+                    ))}
+                </View>
+                <Filter
+                    active={isActiveFilter}
+                    onFilterClick={(value) => setIsActiveFilter(value)}
+                />
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 

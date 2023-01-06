@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { Text, Checkbox, SegmentedButtons, Button } from 'react-native-paper';
 import findRoutes from "../../navigation/appRoutes/findRoutes";
 
 function PeriodScreen({ route, navigation }: any) {
 
-    const [buttonSelected, setButtonSelected] = useState(false);
+    const [buttonSelected, setButtonSelected] = useState('morning');
     const [isSelected, setSelection] = useState(false);
     const [clickedId, setClickedId] = useState(0);
+    const [checked, setChecked] = React.useState(false);
     const gameName = route.params.gameName;
     const date = route.params.date;
     const handleChange = (e) => {
@@ -43,45 +45,53 @@ function PeriodScreen({ route, navigation }: any) {
     //     }
     // }
     return (
-        <View alignItems="center" paddingTop={100}>
-            <View paddingX={8} paddingTop={5}>
-                <Heading>Booking for: {route.params.gameName}</Heading>
+        <View style={{ alignItems: "center", paddingTop: 100 }}>
+            <View style={{ paddingHorizontal: 8, paddingTop: 5 }}>
+                <Text variant="titleMedium">Booking for: {route.params.gameName}</Text>
                 <Text>
                     at{" "}
-                    <Text fontWeight="bold">
+                    <Text style={{ fontWeight: "bold" }}>
                         Game store name on{" "}
-                        <Text fontWeight="bold" fontSize={18}>
+                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
                             {route.params.date}
                         </Text>
                     </Text>
                 </Text>
-                <Box width="100%" display="flex" flexDirection="row" marginTop={50}>
-                    <Checkbox value="time" onChange={handleChange}>Bring me the game home</Checkbox>
-                </Box>
-                <Text marginTop={5}>When do you want to come and play?</Text>
+                <View style={{ width: "100%", flexDirection: "row-reverse", marginTop: 50 }}>
+                    <Text>Bring me the game home</Text>
+                    <Checkbox
+                        status={isSelected ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setSelection(!isSelected);
+                        }}
+                    />
+                </View>
+                <Text style={{ marginTop: 5 }}>When do you want to come and play?</Text>
             </View>
-            <View style={styles.container} marginLeft={70} paddingTop={20}>
-                <Button.Group
-                    isAttached
-                    colorScheme="blue"
-                    mx={{
-                        base: "auto",
-                        md: 0,
-                    }}
-                    width={80}
-                >
-                    <Button variant="outline">Morning</Button>
-                    <Button variant="outline">Afternoon</Button>
-                    <Button variant="outline">Evening</Button>
-                </Button.Group>
+            <View style={styles.container}>
+                <SegmentedButtons value={buttonSelected}
+                    onValueChange={setButtonSelected}
+                    buttons={[
+                        {
+                            value: 'morning',
+                            label: 'Morning',
+                        },
+                        {
+                            value: 'afternon',
+                            label: 'Atfernoon',
+                        },
+                        { value: 'evening', label: 'Evening' },
+                    ]} />
             </View>
             <Button
-                background="#545454"
-                width={80}
-                borderRadius={5}
-                position="absolute"
-                top="210%"
-                onPress={(e) => handleNavigation(e)}
+                buttonColor="#545454"
+                style={{
+                    width: 80,
+                    borderRadius: 5,
+                    position: "absolute",
+                    top: "210%"
+                }}
+                onPress={() => handleNavigation()}
             >
                 Continue
             </Button>
@@ -93,7 +103,8 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: 5,
+        marginTop: 25,
+        marginLeft: 70,
     },
     button: {
         borderColor: "#545454",

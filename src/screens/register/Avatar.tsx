@@ -2,15 +2,15 @@ import React, { useState, useContext } from 'react';
 import {
     StyleSheet,
     Dimensions,
-    Text,
     TouchableOpacity,
     Image,
+    View
 } from 'react-native';
+import Ionicons from "@expo/vector-icons/Ionicons";
 import appRoutes from '../../navigation/appRoutes/index';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/actions/userAction';
-import { Button } from 'react-native-paper';
-// import { Icon } from 'react-native-elements';
+import { Button, Text, Divider } from 'react-native-paper';
 import { RegisterContext } from '../../utils/registerContext';
 import * as ImagePicker from 'expo-image-picker';
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
@@ -62,7 +62,7 @@ export default function Avatar({ navigation }: any) {
             }
         };
         return (
-            <Flex m={4} justifyContent={'center'} alignItems={'center'} height={250}>
+            <View style={{ margin: 4, justifyContent: "center", alignItems: "center", height: 250 }}>
                 {!preview && (
                     <Button
                         onPress={pickImage}
@@ -83,33 +83,41 @@ export default function Avatar({ navigation }: any) {
                         >Select an other</Button>
                     </>
                 )}
-            </Flex>
+            </View>
         );
     };
 
     return (
-        <Flex flex={1}>
-            <Flex height={'16'} pt={'10'} pl={'4'} direction={'row'}>
+        <View style={{ flex: 1 }}>
+            <View style={{
+                height: 16,
+                paddingTop: 10,
+                paddingLeft: 4,
+                flexDirection: "row"
+            }}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={{ backgroundColor: 'transparent' }}
                 >
-                    <Icon size={24} name={'arrow-back'} />
+                    <Ionicons size={24} name="arrow-back" />
                 </TouchableOpacity>
-            </Flex>
-            <Flex flex={4} justifyContent={'center'} alignItems={'center'}>
+            </View>
+            <View
+                style={{
+                    flex: 4,
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
                 {!loading && (
                     <>
-                        <Box mb={'4'}>
+                        <View style={{ marginBottom: 4 }}>
                             <Text>Add an avatar to your profile</Text>
-                        </Box>
+                        </View>
                         <HandleImageSelect />
-                        <Box
-                            justifyContent={preview ? 'center' : 'flex-end'}
-                            alignItems={preview ? 'center' : 'flex-end'}
-                            style={{
+                        <View
+                            style={[preview ? styles.previewed : styles.notPreviewed, {
                                 width: '100%',
-                            }}
+                            }]}
                         >
                             {preview && (
                                 <Button
@@ -124,16 +132,16 @@ export default function Avatar({ navigation }: any) {
                                     buttonColor={primaryColor}
                                 >Later</Button>
                             )}
-                        </Box>
+                        </View>
                     </>
                 )}
                 {loading && (
                     <>
-                        <Spinner />
+                        <Divider />
                     </>
                 )}
-            </Flex>
-        </Flex>
+            </View>
+        </View>
     );
 }
 
@@ -153,6 +161,14 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
         elevation: 2,
+    },
+    previewed: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    notPreviewed: {
+        justifyContent: "flex-end",
+        alignItems: "flex-end"
     },
     inputStyle: { fontSize: 16 },
     labelStyle: { fontSize: 14 },

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import appRoutes from '../../navigation/appRoutes/index';
-import { Button } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { RegisterContext } from '../../utils/registerContext';
 import {
     isUsernameInvalid,
@@ -71,18 +71,19 @@ export default function Register({ navigation }: any) {
     };
 
     return (
-        <Flex flex={1} justifyContent={'center'} alignItems={'center'}>
-            <Box>
+        <View
+            style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+            <View>
                 <TextInput
                     value={username}
                     style={[
                         styles.input,
                         usernameError.length !== 0 && styles.inputError,
                     ]}
-                    inputStyle={styles.inputStyle}
-                    labelStyle={styles.labelStyle}
-                    placeholderStyle={styles.placeholderStyle}
-                    textErrorStyle={styles.textErrorStyle}
                     label="Username"
                     placeholderTextColor="gray"
                     onChangeText={(text) => {
@@ -92,10 +93,6 @@ export default function Register({ navigation }: any) {
                 <TextInput
                     value={email}
                     style={[styles.input, emailError.length !== 0 && styles.inputError]}
-                    inputStyle={styles.inputStyle}
-                    labelStyle={styles.labelStyle}
-                    placeholderStyle={styles.placeholderStyle}
-                    textErrorStyle={styles.textErrorStyle}
                     label="Email"
                     placeholderTextColor="gray"
                     onChangeText={(text) => {
@@ -108,10 +105,6 @@ export default function Register({ navigation }: any) {
                         styles.input,
                         passwordError.length !== 0 && styles.inputError,
                     ]}
-                    inputStyle={styles.inputStyle}
-                    labelStyle={styles.labelStyle}
-                    placeholderStyle={styles.placeholderStyle}
-                    textErrorStyle={styles.textErrorStyle}
                     label="Password"
                     placeholderTextColor="gray"
                     secureTextEntry
@@ -119,11 +112,11 @@ export default function Register({ navigation }: any) {
                         setPassword(text);
                     }}
                 />
-                <Box
-                    justifyContent={'flex-end'}
-                    alignItems={'flex-end'}
+                <View
                     style={{
                         opacity: isInputInValid ? 0.6 : 1,
+                        justifyContent: "flex-end",
+                        alignItems: "flex-end"
                     }}
                 >
                     <Button
@@ -132,22 +125,31 @@ export default function Register({ navigation }: any) {
                         disabled={isInputInValid}
                         buttonColor={primaryColor}
                     >Next</Button>
-                </Box>
-                <Box my={4} alignItems={'center'}>
+                </View>
+                <View
+                    style={{
+                        marginVertical: 4,
+                        alignItems: "center"
+                    }}
+                >
                     <TouchableOpacity
                         onPress={() => navigation.navigate(appRoutes.LOGIN_SCREEN)}
                     >
                         <Text style={styles.registerTextStyle}>Already an account ?</Text>
                     </TouchableOpacity>
-                </Box>
-                <Box justifyContent={'center'} alignItems={'center'}>
+                </View>
+                <View
+                    style={{
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
                     <Text style={{ color: errorColor }}>{usernameError}</Text>
                     <Text style={{ color: errorColor }}>{emailError}</Text>
                     <Text style={{ color: errorColor }}>{passwordError}</Text>
                     <Text style={{ color: errorColor }}>{error}</Text>
-                </Box>
-            </Box>
-        </Flex>
+                </View>
+            </View>
+        </View>
     );
 }
 

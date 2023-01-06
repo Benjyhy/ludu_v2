@@ -1,18 +1,15 @@
 import React from "react";
+import { View } from "react-native";
+import { blueGrey50, grey200, grey600 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+import { Divider, Text } from 'react-native-paper';
 
 const StoreListing = ({ item }: any) => {
     return (
-        <Box
-            borderBottomWidth="1"
-            _dark={{
-                borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            py="6"
+        <View
+            style={{ borderBottomWidth: 1, borderColor: grey200, paddingVertical: 6 }}
         >
-            <HStack
-                space={3}
-                justifyContent="space-between"
+            <View
+                style={{ margin: 3, justifyContent: "space-between" }}
             >
                 {/* <Avatar
                                     size="48px"
@@ -20,28 +17,21 @@ const StoreListing = ({ item }: any) => {
                                         uri: item.avatarUrl,
                                     }}
                                 /> */}
-                <VStack>
+                <View>
                     <Text
-                        _dark={{
-                            color: "warmGray.50",
-                        }}
-                        color="coolGray.800"
-                        bold
+                        style={{ fontWeight: "bold", color: blueGrey50 }}
                     >
                         {item.storeName}
                     </Text>
                     <Text
-                        color="coolGray.600"
-                        _dark={{
-                            color: "warmGray.200",
-                        }}
+                        style={{ color: grey600 }}
                     >
                         {item.city}
                     </Text>
-                </VStack>
-                <Spacer />
-            </HStack>
-        </Box>
+                </View>
+                <Divider />
+            </View>
+        </View>
     )
 }
 

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { View } from "react-native";
+import { Button, Text, Checkbox } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { findRoutes } from "../../navigation/appRoutes/findRoutes";
+import findRoutes from "../../navigation/appRoutes/findRoutes";
 
 function TimePickerScreen({ route, navigation }: any) {
 
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
+    const [checked, setChecked] = React.useState(false);
     const onChange = (event, selectedDate) => {
         setShow(false);
         if (event?.type === "dismissed") {
@@ -18,24 +21,30 @@ function TimePickerScreen({ route, navigation }: any) {
         setShow(true);
     };
     return (
-        <Flex alignItems="center" paddingTop={100}>
-            <View paddingX={8} paddingTop={5}>
-                <Heading>Booking for: {route.params.gameName}</Heading>
+        <View style={{ alignItems: "center", paddingTop: 100 }}>
+            <View style={{ paddingHorizontal: 8, paddingTop: 5 }}>
+                <Text variant="titleMedium">Booking for: {route.params.gameName}</Text>
                 <Text>
-                    at <Text fontWeight="bold">Game store name on{" "}</Text>
-                    <Text fontWeight="bold" fontSize={18}>
+                    at <Text style={{ fontWeight: "bold" }}>Game store name on{" "}</Text>
+                    <Text style={{ fontWeight: "bold", fontSize: 18 }}>
                         {route.params.date}
                     </Text>
                 </Text>
-                <Box width="100%" display="flex" flexDirection="row" marginTop={50}>
-                    <Checkbox value="time" defaultIsChecked>Bring me the game home</Checkbox>
-                </Box>
-                <Text marginTop={5}>When do you want us to bring you the game?</Text>
+                <View style={{ width: "100%", flexDirection: "row-reverse", marginTop: 50 }}>
+                    <Text>Bring me the game home</Text>
+                    <Checkbox
+                        status={checked ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setChecked(!checked);
+                        }}
+                    />
+                </View>
+                <Text style={{ marginTop: 5 }}>When do you want us to bring you the game?</Text>
             </View>
-            <View display="flex" flexDirection="column" alignItems="center" paddingTop={75}>
+            <View style={{ alignItems: "center", paddingTop: 5 }}>
                 <Button
-                    width={80}
-                    background="#545454"
+                    style={{ width: 80 }}
+                    buttonColor="#545454"
                     onPress={() => {
                         showTimePicker();
                     }}
@@ -43,8 +52,8 @@ function TimePickerScreen({ route, navigation }: any) {
                     Choose Time for delivery
                 </Button>
                 <View>
-                    <Text fontSize={15}>Time chosen:</Text>
-                    <Text fontWeight="bold" fontSize={18}>
+                    <Text>Time chosen:</Text>
+                    <Text style={{ fontWeight: "bold" }}>
                         {`${`0${date.getHours()}`.slice(
                             -2,
                         )}:${`0${date.getMinutes()}`.slice(-2)}`}
@@ -61,15 +70,12 @@ function TimePickerScreen({ route, navigation }: any) {
                 )}
             </View>
             <Button
-                width={80}
-                background="#545454"
-                borderRadius={5}
-                position="absolute"
-                top="190%"
+                style={{ width: 80, borderRadius: 5, position: "absolute", top: "190%" }}
+                buttonColor="#545454"
             >
                 Continue
             </Button>
-        </Flex>
+        </View>
     );
 }
 

@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import appRoutes from '../../navigation/appRoutes/index';
-import { Button } from 'react-native-paper';
-// import { Icon } from 'react-native-elements';
+import { Button, TextInput } from 'react-native-paper';
 import { RegisterContext } from '../../utils/registerContext';
 import { isValidPhonenumber, isZipCodeValide } from '../../utils/regex';
 import { errorColor, primaryColor } from '../../utils/colors';
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 const { width: ScreenWidth } = Dimensions.get('screen');
 
 export default function Phone({ navigation }: any) {
@@ -57,27 +58,34 @@ export default function Phone({ navigation }: any) {
     };
 
     return (
-        <Flex flex={1}>
-            <Flex height={'16'} pt={'10'} pl={'4'} direction={'row'}>
+        <View style={{ flex: 1 }}>
+            <View
+                style={{
+                    height: 16,
+                    paddingTop: 10,
+                    paddingLeft: 4,
+                    flexDirection: "row"
+                }}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={{ backgroundColor: 'transparent' }}
                 >
-                    <Icon size={24} name={'arrow-back'} />
+                    <Ionicons size={24} name="arrow-back" />
                 </TouchableOpacity>
-            </Flex>
-            <Flex flex={4} justifyContent={'center'} alignItems={'center'}>
-                <Box mb={'4'}>
+            </View>
+            <View
+                style={{
+                    flex: 4,
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                <View style={{ marginBottom: 4 }}>
                     <Text>Please register your phone and your postal address</Text>
-                </Box>
-                <Box>
+                </View>
+                <View>
                     <TextInput
                         value={phone}
                         style={[styles.input, phoneError.length !== 0 && styles.inputError]}
-                        inputStyle={styles.inputStyle}
-                        labelStyle={styles.labelStyle}
-                        placeholderStyle={styles.placeholderStyle}
-                        textErrorStyle={styles.textErrorStyle}
                         label="Phone"
                         placeholder="0618273625"
                         placeholderTextColor="gray"
@@ -88,10 +96,6 @@ export default function Phone({ navigation }: any) {
                     <TextInput
                         value={address}
                         style={styles.input}
-                        inputStyle={styles.inputStyle}
-                        labelStyle={styles.labelStyle}
-                        placeholderStyle={styles.placeholderStyle}
-                        textErrorStyle={styles.textErrorStyle}
                         label="Address"
                         placeholder=" 16 rue de Beaumont"
                         placeholderTextColor="gray"
@@ -102,10 +106,6 @@ export default function Phone({ navigation }: any) {
                     <TextInput
                         value={city}
                         style={styles.input}
-                        inputStyle={styles.inputStyle}
-                        labelStyle={styles.labelStyle}
-                        placeholderStyle={styles.placeholderStyle}
-                        textErrorStyle={styles.textErrorStyle}
                         label="City Address"
                         placeholder="Paris"
                         placeholderTextColor="gray"
@@ -116,10 +116,6 @@ export default function Phone({ navigation }: any) {
                     <TextInput
                         value={postcode}
                         style={[styles.input, zipError.length !== 0 && styles.inputError]}
-                        inputStyle={styles.inputStyle}
-                        labelStyle={styles.labelStyle}
-                        placeholderStyle={styles.placeholderStyle}
-                        textErrorStyle={styles.textErrorStyle}
                         label="Postcode"
                         placeholder="59000"
                         placeholderTextColor="gray"
@@ -127,11 +123,11 @@ export default function Phone({ navigation }: any) {
                             setPostcode(text);
                         }}
                     />
-                    <Box
-                        justifyContent={'flex-end'}
-                        alignItems={'flex-end'}
+                    <View
                         style={{
                             opacity: isInputInValid ? 0.6 : 1,
+                            justifyContent: "flex-end",
+                            alignItems: "flex-end"
                         }}
                     >
                         <Button
@@ -140,14 +136,16 @@ export default function Phone({ navigation }: any) {
                             disabled={isInputInValid}
                             buttonColor={primaryColor}
                         >Next</Button>
-                    </Box>
-                    <Box justifyContent={'center'} alignItems={'center'}>
+                    </View>
+                    <View style={{
+                        justifyContent: "center", alignItems: "center"
+                    }}>
                         <Text style={{ color: errorColor }}>{phoneError}</Text>
                         <Text style={{ color: errorColor }}>{zipError}</Text>
-                    </Box>
-                </Box>
-            </Flex>
-        </Flex>
+                    </View>
+                </View>
+            </View>
+        </View>
     );
 }
 
