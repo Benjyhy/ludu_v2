@@ -33,7 +33,7 @@ const Search = () => {
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <TextInput
                     placeholder="Search..."
-                    style={{ width: "75%", maxWidth: "300px", marginTop: 3 }}
+                    style={{ width: "75%", marginTop: 3 }}
                 />
                 <Switch onValueChange={handleToggle} value={!isMap} />
             </View>
