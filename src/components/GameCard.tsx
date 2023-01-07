@@ -5,31 +5,31 @@ import { Dimensions, View, Image, StyleSheet, TouchableOpacity } from 'react-nat
 import { Text } from 'react-native-paper';
 
 
-const GameCard = ({ item, navigation, direction }: any) => {
+const GameCard = ({ item, navigation, size }: any) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate(findRoutes.GAME_SCREEN, { item })}>
             <View
                 style={[
-                    styles.card, direction === 'row' ? styles.rowCard : styles.colCard, { height: "auto" }
+                    styles.card, size === 'small' ? styles.smallCard : styles.largeCard
                 ]}
 
             >
-                <Image style={[direction === 'row' ? styles.rowImg : styles.colImg]} resizeMode="cover" source={{
+                <Image style={[size === 'small' ? styles.smallImg : styles.largeImg]} resizeMode="cover" source={{
                     uri: "https://via.placeholder.com/150"
                 }} />
                 <View style={styles.content}>
-                    <View style={{ marginVertical: 15 }}>
-                        <Text variant="headlineSmall">
+                    <View style={{ marginBottom: 15 }}>
+                        <Text variant="titleLarge" style={{ fontWeight: "bold" }}>
                             {item.gameName}
                         </Text>
-                        <View style={{ margin: 3, flexDirection: 'row' }}>
+                        <View style={{ margin: 3, flexDirection: 'row', flexWrap: "wrap" }}>
                             {item.tags.map((tag: string, index: React.Key | null | undefined) =>
                                 <Tag tagName={tag} key={index} />
                             )}
                         </View>
                     </View>
                     <View style={{ marginBottom: 8 }}>
-                        <Text>
+                        <Text variant="bodySmall">
                             {item.description}
                         </Text>
                     </View>
@@ -43,31 +43,38 @@ export default GameCard;
 
 const styles = StyleSheet.create({
     card: {
-        width: "auto",
         marginBottom: 15,
         overflow: 'hidden',
         borderWidth: 1,
-        paddingVertical: 20
+        height: "auto",
+        borderRadius: 5,
+        width: "50%"
     },
-    rowCard: {
+    smallCard: {
+        width: Dimensions.get("window").width / 2,
         alignItems: 'flex-start',
-        flexDirection: 'row'
+        flexDirection: 'column',
+        marginRight: 15,
+        height: 350
     },
-    colCard: {
+    largeCard: {
+        width: "auto",
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        paddingBottom: 20
     },
-    rowImg: {
-        width: 150,
+    smallImg: {
+        width: "100%",
         height: 150
     },
-    colImg: {
-        width: 150,
+    largeImg: {
+        width: "100%",
         height: 150
     },
     content: {
-        padding: 4,
+        padding: 10,
         margin: 3,
-        flex: 1
+        flex: 1,
+        marginLeft: 0,
     }
 });

@@ -115,19 +115,21 @@ const GameScreen = ({ route, navigation }: any) => {
                 </View>
 
                 {/* render 'game alike' */}
-                <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
-                    Game alike
-                </Text >
-                <ScrollView horizontal>
-                    {gameData.map((game: any, index) => (
-                        <GameCard
-                            item={game}
-                            navigation={navigation}
-                            direction="row"
-                            key={game.id}
-                        />
-                    ))}
-                </ScrollView>
+                <View style={{ paddingHorizontal: 15 }}>
+                    <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
+                        Game alike
+                    </Text >
+                    <ScrollView horizontal>
+                        {gameData.map((game: any, index) => (
+                            <GameCard
+                                item={game}
+                                navigation={navigation}
+                                size="small"
+                                key={game.id}
+                            />
+                        ))}
+                    </ScrollView>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );

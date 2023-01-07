@@ -36,7 +36,7 @@ const HomeFeedScreen = ({ navigation }: any) => {
                     <GameCard
                         item={item}
                         navigation={navigation}
-                        direction="column"
+                        size="large"
                         key={item.id}
                     />
                 ))}

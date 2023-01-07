@@ -43,9 +43,10 @@ const styles = StyleSheet.create({
         marginRight: 15,
         overflow: 'hidden',
         borderWidth: 1,
-        padding: 20,
+        padding: 10,
         alignItems: 'flex-start',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderRadius: 5
     },
     colCard: {
         alignItems: 'center',

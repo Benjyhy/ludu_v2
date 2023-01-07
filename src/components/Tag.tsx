@@ -12,7 +12,8 @@ const Tag = ({ tagName }: any) => {
                 paddingHorizontal: 1,
                 paddingVertical: 1,
                 width: "auto",
-                marginRight: 10
+                marginRight: 10,
+                marginBottom: 5
             }}
         >
             {tagName}
