@@ -2,11 +2,12 @@ import React from 'react';
 import gameData from '../../mocks/gameMockData';
 import GameReviewCard from '../../components/GameReviewCard';
 import GameCard from '../../components/GameCard';
-import { TouchableOpacity } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import { InlineTextIcon } from '../../components/InlineTextIcon';
 import { Button, Divider, Text } from 'react-native-paper';
 import { View, ScrollView, SafeAreaView, Image } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Tag from '../../components/Tag';
 
 const GameScreen = ({ route, navigation }: any) => {
     const game = gameData.find((game) => game.id === route.params.item.id);
@@ -20,13 +21,12 @@ const GameScreen = ({ route, navigation }: any) => {
     }
     return (
         <SafeAreaView>
-            <ScrollView style={{ marginHorizontal: 2 }}>
+            <ScrollView style={{ paddingHorizontal: 15 }}>
                 {/* display title and button to like review and shares */}
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text variant="titleLarge">
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                    <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
                         {game.gameName}
                     </Text>
-                    <Divider />
                     <View style={{ flexDirection: "row" }}>
                         <View>
                             <TouchableOpacity onPress={() => console.log('press like')}>
@@ -47,7 +47,7 @@ const GameScreen = ({ route, navigation }: any) => {
                 </View>
 
                 {/* Display likes reviews and share number*/}
-                <View style={{ flexDirection: "row", marginBottom: 2 }}>
+                <View style={{ flexDirection: "row", marginVertical: 15 }}>
                     <View>
                         <InlineTextIcon icon={'star'} text={'22 Likes'} />
                     </View>
@@ -60,29 +60,22 @@ const GameScreen = ({ route, navigation }: any) => {
                 </View>
 
                 {/* display image, tags, description */}
-                <View style={{ flexDirection: "row", marginBottom: 2, marginLeft: 2.5, marginRight: 1 }}>
+                <View>
                     <View>
-                        <Image
-                            source={{
-                                uri: game.gameImgUrl,
-                            }}
-                        ></Image>
+                        <Image resizeMode="cover" style={{ width: Dimensions.get("window").width, height: 150, marginLeft: -15 }} source={{
+                            uri: "https://via.placeholder.com/150"
+                        }} />
                     </View>
                     <View
                         style={{
                             flex: 1,
                             flexDirection: 'row',
                             flexWrap: 'wrap',
-                            marginHorizontal: 4
+                            marginVertical: 15
                         }}
                     >
                         {game.tags.map((tag: string, index) => (
-                            <Text
-                                style={{ backgroundColor: 'black', color: 'white', paddingHorizontal: 2, borderRadius: 20, borderWidth: 1, borderStyle: "solid", fontSize: 14, marginLeft: 1, marginRight: 1, marginBottom: 1 }}
-                                key={index}
-                            >
-                                {tag}
-                            </Text>
+                            <Tag tagName={tag} key={index} />
                         ))}
                         <Text style={{ marginLeft: 1, fontSize: 12 }}>
                             {game.description}
@@ -94,16 +87,16 @@ const GameScreen = ({ route, navigation }: any) => {
                 <View
                     style={{ flexDirection: "row", marginBottom: 4, width: "100%", justifyContent: "space-around", }}
                 >
-                    <TouchableOpacity onPress={() => console.log('Play now')}>
-                        <InlineTextIcon icon={'happy'} text={'Play now'} />
-                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => console.log('Book')}>
-                        <InlineTextIcon icon={'book'} text={'Book'} />
+                        <InlineTextIcon icon={'book'} text={'Book'} background={'lightGrey'} btnMode={true} outline={true} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => console.log('Play now')}>
+                        <InlineTextIcon icon={'happy'} text={'Play now'} background={"#f04040"} btnMode={true} iconColor={"white"} />
                     </TouchableOpacity>
                 </View>
-
+                <Divider style={{ marginVertical: 15 }} />
                 {/* render 'they loved playing it' */}
-                <View style={{ paddingHorizontal: 15 }}>
+                <View style={{ marginVertical: 20 }}>
                     <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
                         They loved playing it
                     </Text>
@@ -115,7 +108,7 @@ const GameScreen = ({ route, navigation }: any) => {
                 </View>
 
                 {/* render 'game alike' */}
-                <View style={{ paddingHorizontal: 15 }}>
+                <View>
                     <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
                         Game alike
                     </Text >

@@ -1,11 +1,10 @@
 import React from "react";
-import findRoutes from "../navigation/appRoutes/findRoutes";
-import { Dimensions, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions, View, Image, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
-const GameReviewCard = ({ item, navigation, direction }: any) => {
+const GameReviewCard = ({ item }: any) => {
     return (
-        <TouchableOpacity onPress={() => navigation.navigate(findRoutes.GAME_SCREEN, { item })}>
+        <View>
             <View
                 style={[
                     styles.card
@@ -28,7 +27,7 @@ const GameReviewCard = ({ item, navigation, direction }: any) => {
                     </View>
                 </View>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 
 };
