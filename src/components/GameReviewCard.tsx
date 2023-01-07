@@ -8,28 +8,21 @@ const GameReviewCard = ({ item, navigation, direction }: any) => {
         <TouchableOpacity onPress={() => navigation.navigate(findRoutes.GAME_SCREEN, { item })}>
             <View
                 style={[
-                    styles.card, direction === 'row' ? styles.rowCard : styles.colCard
+                    styles.card
                 ]}
 
             >
                 <View>
-                    <View
-
-                        style={[direction === 'row' ? styles.rowImg : styles.colImg]}
-                    >
-                        <Image resizeMode="cover" source={{
-                            uri: item.avatar
-                        }} />
-                    </View>
+                    <Image style={[styles.img]} resizeMode="cover" source={{
+                        uri: "https://via.placeholder.com/150"
+                    }} />
+                    <Text variant="bodyMedium" style={{ fontWeight: "bold", textAlign: "center", marginTop: 10 }}>
+                        {item.name}
+                    </Text>
                 </View>
                 <View style={styles.content}>
-                    <View style={{ margin: 2 }}>
-                        <Text variant="titleLarge">
-                            {item.name}
-                        </Text>
-                    </View>
                     <View>
-                        <Text style={{ fontWeight: "bold" }}>
+                        <Text variant="bodySmall">
                             {item.description}
                         </Text>
                     </View>
@@ -44,14 +37,13 @@ export default GameReviewCard;
 
 const styles = StyleSheet.create({
     card: {
-        height: '100%',
-        width: Dimensions.get('window').width - 30,
+        height: "auto",
+        width: Dimensions.get('window').width - 60,
         marginBottom: 5,
-        marginRight: 5,
+        marginRight: 15,
         overflow: 'hidden',
-        borderWidth: 1
-    },
-    rowCard: {
+        borderWidth: 1,
+        padding: 20,
         alignItems: 'flex-start',
         flexDirection: 'row'
     },
@@ -59,17 +51,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column'
     },
-    rowImg: {
-        width: "auto",
-        height: "100%"
-    },
-    colImg: {
-        width: "100%",
-        height: "auto"
+    img: {
+        width: 75,
+        height: 75
     },
     content: {
-        padding: 4,
-        margin: 3,
-        flex: 1
+        flex: 1,
+        marginLeft: 15
     }
 });

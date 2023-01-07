@@ -92,7 +92,7 @@ const GameScreen = ({ route, navigation }: any) => {
 
                 {/* render 'play now' and 'book' button */}
                 <View
-                    style={{ flexDirection: "row", marginBottom: 4, width: "100%", justifyContent: "space-around" }}
+                    style={{ flexDirection: "row", marginBottom: 4, width: "100%", justifyContent: "space-around", }}
                 >
                     <TouchableOpacity onPress={() => console.log('Play now')}>
                         <InlineTextIcon icon={'happy'} text={'Play now'} />
@@ -103,17 +103,19 @@ const GameScreen = ({ route, navigation }: any) => {
                 </View>
 
                 {/* render 'they loved playing it' */}
-                <Text style={{ marginTop: 3, marginBottom: 2, marginLeft: 1 }}>
-                    They loved playing it
-                </Text>
-                <ScrollView horizontal>
-                    {game.reviews.map((review, index) => (
-                        <GameReviewCard item={review} key={index} direction={'row'} />
-                    ))}
-                </ScrollView>
+                <View style={{ paddingHorizontal: 15 }}>
+                    <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
+                        They loved playing it
+                    </Text>
+                    <ScrollView horizontal>
+                        {game.reviews.map((review, index) => (
+                            <GameReviewCard item={review} key={index} />
+                        ))}
+                    </ScrollView>
+                </View>
 
                 {/* render 'game alike' */}
-                <Text variant="titleMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1 }}>
+                <Text variant="headlineMedium" style={{ marginTop: 3, marginBottom: 2, marginLeft: 1, fontWeight: "bold" }}>
                     Game alike
                 </Text >
                 <ScrollView horizontal>
