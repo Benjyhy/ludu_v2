@@ -12,7 +12,7 @@ import { MainAppState } from "../../models/states";
 function BookingGameScreen({ route, navigation }: any) {
     const item = route.params.game;
     const gamePlaces = storeMockData;
-
+    console.log(item)
     const game = gamePlaces.find(game => game.gameId.id === item.id);
     const items = gamePlaces.filter(game => game.gameId.id === item.id);
     const gameName = game.gameId.gameName;
@@ -79,7 +79,7 @@ function BookingGameScreen({ route, navigation }: any) {
                             <Button
                                 buttonColor="#545454"
                                 style={{ marginVertical: 10, borderRadius: 5 }}
-                                onTouchEnd={() => navigation.navigate(findRoutes.DATEPICKER_FEED, { gameName: gameName })}
+                                onTouchEnd={() => navigation.navigate(findRoutes.HOME_FEED)}
                             >
                                 Continue
                             </Button>

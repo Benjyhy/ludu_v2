@@ -4,8 +4,7 @@ enum findRoutes {
     GAME_SCREEN = 'Game single',
     BOOKING_FEED = 'Book Game',
     DATEPICKER_FEED = 'Date choice',
-    PERIOD_FEED = 'Journey period',
-    TIME_FEED = 'Choose an hour for delivery',
+    PERIOD_FEED = 'Journey period or hour for delivery'
 }
 
 export default findRoutes;

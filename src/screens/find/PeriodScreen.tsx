@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text, Checkbox, SegmentedButtons, Button } from 'react-native-paper';
 import findRoutes from "../../navigation/appRoutes/findRoutes";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 function PeriodScreen({ route, navigation }: any) {
 
@@ -9,45 +10,36 @@ function PeriodScreen({ route, navigation }: any) {
     const [isSelected, setSelection] = useState(false);
     const [clickedId, setClickedId] = useState(0);
     const [checked, setChecked] = React.useState(false);
-    const gameName = route.params.gameName;
-    const date = route.params.date;
+    const [date, setDate] = useState(new Date());
+    const [show, setShow] = useState(false);
+    const onChange = (event, selectedDate) => {
+        setShow(false);
+        if (event?.type === "dismissed") {
+            setDate(date);
+            return;
+        }
+        setDate(selectedDate);
+    };
+    const showTimePicker = () => {
+        setShow(true);
+    };
+    const game = route.params.game;
+    // const date = route.params.date;
     const handleChange = (e) => {
         setSelection(e)
     }
     const handleNavigation = () => {
         isSelected
-            ? navigation.navigate(findRoutes.TIME_FEED, {
-                gameName: gameName,
+            ? navigation.navigate(findRoutes.BOOKING_FEED, {
+                game: game,
                 date: date,
             })
             : navigation.goBack();
     }
-    // function ButtonGroup({ buttons }) {
-    //     {
-    //         <View />;
-    //         buttons.map((buttonLabel, index) => {
-    //             return (
-    //                 <TouchableOpacity
-    //                     onPress={item => handleClick(item, index)}
-    //                     key={index}
-    //                     style={[
-    //                         index === clickedId
-    //                             ? styles.buttonActive
-    //                             : styles.button,
-    //                     ]}
-    //                 >
-    //                     <Text color="#000000" paddingTop={5}>
-    //                         {buttonLabel}
-    //                     </Text>
-    //                 </TouchableOpacity>
-    //             );
-    //         });
-    //     }
-    // }
     return (
         <View style={{ alignItems: "center", paddingTop: 100 }}>
             <View style={{ paddingHorizontal: 8, paddingTop: 5 }}>
-                <Text variant="titleMedium">Booking for: {route.params.gameName}</Text>
+                <Text variant="titleMedium">Booking for: {route.params.game.gameName}</Text>
                 <Text>
                     at{" "}
                     <Text style={{ fontWeight: "bold" }}>
@@ -66,9 +58,10 @@ function PeriodScreen({ route, navigation }: any) {
                         }}
                     />
                 </View>
-                <Text style={{ marginTop: 5 }}>When do you want to come and play?</Text>
             </View>
-            <View style={styles.container}>
+            {!isSelected ? <View style={styles.container}>
+                <Text style={{ marginTop: 5 }}>When do you want to come and play?</Text>
+
                 <SegmentedButtons value={buttonSelected}
                     onValueChange={setButtonSelected}
                     buttons={[
@@ -82,7 +75,36 @@ function PeriodScreen({ route, navigation }: any) {
                         },
                         { value: 'evening', label: 'Evening' },
                     ]} />
+
             </View>
+                : <View style={{ alignItems: "center", paddingTop: 5 }}>
+                    <Button
+                        style={{ width: 80 }}
+                        buttonColor="#545454"
+                        onPress={() => {
+                            showTimePicker();
+                        }}
+                    >
+                        Choose Time for delivery
+                    </Button>
+                    <View>
+                        <Text>Time chosen:</Text>
+                        <Text style={{ fontWeight: "bold" }}>
+                            {`${`0${date.getHours()}`.slice(
+                                -2,
+                            )}:${`0${date.getMinutes()}`.slice(-2)}`}
+                        </Text>
+                    </View>
+                    {show && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode="time"
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
+                </View>}
             <Button
                 buttonColor="#545454"
                 style={{

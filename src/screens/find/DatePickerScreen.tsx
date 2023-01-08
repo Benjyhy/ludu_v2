@@ -26,13 +26,13 @@ function DatePickerScreen({ route, navigation }: any) {
     }, [selected]);
 
 
-    const gameName = route.params.gameName;
+    const game = route.params.game;
     return (
         <SafeAreaView>
             <ScrollView>
                 <View style={{ marginTop: 70 }}>
                     <View style={{ paddingHorizontal: 8, alignItems: "center", paddingTop: 5 }}>
-                        <Text variant="titleMedium">Booking for: {gameName}</Text>
+                        <Text variant="titleMedium">Booking for: {game.gameName}</Text>
                         <Text>
                             at <Text style={{ fontWeight: "bold" }}>Game store name</Text>
                         </Text>
@@ -65,7 +65,7 @@ function DatePickerScreen({ route, navigation }: any) {
                         onPress={() =>
                             navigation.navigate(findRoutes.PERIOD_FEED, {
                                 date: moment(selected).format("DD/MM/YYYY"),
-                                gameName: gameName
+                                game: game
                             })
                         }
                     >
