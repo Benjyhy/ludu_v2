@@ -11,17 +11,12 @@ function PeriodScreen({ route, navigation }: any) {
     const [clickedId, setClickedId] = useState(0);
     const [checked, setChecked] = React.useState(false);
     const [date, setDate] = useState(new Date());
-    const [show, setShow] = useState(false);
     const onChange = (event, selectedDate) => {
-        setShow(false);
         if (event?.type === "dismissed") {
             setDate(date);
             return;
         }
         setDate(selectedDate);
-    };
-    const showTimePicker = () => {
-        setShow(true);
     };
     const game = route.params.game;
     // const date = route.params.date;
@@ -37,22 +32,26 @@ function PeriodScreen({ route, navigation }: any) {
             : navigation.goBack();
     }
     return (
-        <View style={{ alignItems: "center", paddingTop: 100 }}>
-            <View style={{ paddingHorizontal: 8, paddingTop: 5 }}>
-                <Text variant="titleMedium">Booking for: {route.params.game.gameName}</Text>
-                <Text>
-                    at{" "}
-                    <Text style={{ fontWeight: "bold" }}>
-                        Game store name on{" "}
-                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                            {route.params.date}
+        <View style={{ position: "relative", height: "100%", alignItems: "center" }}>
+            <View style={{ marginTop: 70 }}>
+                <View style={{ paddingHorizontal: 8, alignItems: "center", paddingTop: 5 }}>
+                    <Text variant="headlineMedium" style={{ fontWeight: "bold" }}>Booking for: {route.params.game.gameName}</Text>
+                    <Text variant="bodyLarge">
+                        at{" "}
+                        <Text style={{ fontWeight: "bold" }}>
+                            Game store name <Text>on</Text>{" "}
+                            <Text style={{ fontWeight: "bold" }}>
+                                {route.params.date}
+                            </Text>
                         </Text>
                     </Text>
-                </Text>
-                <View style={{ width: "100%", flexDirection: "row-reverse", marginTop: 50 }}>
-                    <Text>Bring me the game home</Text>
-                    <Checkbox
+                </View>
+                <View style={{ width: "auto", flexDirection: "row-reverse", marginTop: 50, justifyContent: "center", alignItems: "center" }}>
+                    <Text variant="titleMedium">Bring me the game home</Text>
+                    <Checkbox.Android
                         status={isSelected ? 'checked' : 'unchecked'}
+                        color="#f04040"
+                        uncheckedColor="#f04040"
                         onPress={() => {
                             setSelection(!isSelected);
                         }}
@@ -60,7 +59,7 @@ function PeriodScreen({ route, navigation }: any) {
                 </View>
             </View>
             {!isSelected ? <View style={styles.container}>
-                <Text style={{ marginTop: 5 }}>When do you want to come and play?</Text>
+                <Text variant="titleMedium" style={{ marginBottom: 10 }}>When do you want to come and play?</Text>
 
                 <SegmentedButtons value={buttonSelected}
                     onValueChange={setButtonSelected}
@@ -77,25 +76,12 @@ function PeriodScreen({ route, navigation }: any) {
                     ]} />
 
             </View>
-                : <View style={{ alignItems: "center", paddingTop: 5 }}>
-                    <Button
-                        style={{ width: 80 }}
-                        buttonColor="#545454"
-                        onPress={() => {
-                            showTimePicker();
-                        }}
-                    >
-                        Choose Time for delivery
-                    </Button>
-                    <View>
-                        <Text>Time chosen:</Text>
-                        <Text style={{ fontWeight: "bold" }}>
-                            {`${`0${date.getHours()}`.slice(
-                                -2,
-                            )}:${`0${date.getMinutes()}`.slice(-2)}`}
-                        </Text>
-                    </View>
-                    {show && (
+                : <View style={styles.container}>
+                    <Text variant="titleMedium" style={{ marginBottom: 10 }}>What time do you want the game delivered ?</Text>
+                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <View style={{ marginRight: 5 }}>
+                            <Text variant="bodyLarge">Chosen time:</Text>
+                        </View>
                         <DateTimePicker
                             testID="dateTimePicker"
                             value={date}
@@ -103,16 +89,12 @@ function PeriodScreen({ route, navigation }: any) {
                             display="default"
                             onChange={onChange}
                         />
-                    )}
+                    </View>
                 </View>}
             <Button
-                buttonColor="#545454"
-                style={{
-                    width: 80,
-                    borderRadius: 5,
-                    position: "absolute",
-                    top: "210%"
-                }}
+                style={[styles.btn]}
+                buttonColor="#f04040"
+                textColor="white"
                 onPress={() => handleNavigation()}
             >
                 Continue
@@ -122,19 +104,19 @@ function PeriodScreen({ route, navigation }: any) {
 }
 const styles = StyleSheet.create({
     container: {
-        display: "flex",
-        flexDirection: "column",
         alignItems: "center",
-        marginTop: 25,
-        marginLeft: 70,
+        justifyContent: "center",
+        paddingHorizontal: 15,
+        marginTop: 20
     },
-    button: {
-        borderColor: "#545454",
-        borderWidth: 1,
-        borderRadius: 6,
-        width: 300,
-        height: 40,
-        marginTop: 20,
+    btn: {
+        borderRadius: 5,
+        width: "auto",
+        position: "absolute",
+        bottom: 20,
+        alignSelf: "center",
+        paddingHorizontal: 20,
+        paddingVertical: 5
     },
     buttonActive: {
         backgroundColor: "#000000",

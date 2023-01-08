@@ -50,11 +50,14 @@ const Filter = (props: FilterProps) => {
                 elevation: 8,
             }}>
                 <View style={{ justifyContent: "space-around", height: "100%" }}>
-                    <Text variant="headlineSmall" style={{ fontWeight: "bold" }}>Filtrez les jeux selon vos préférences :</Text>
+                    <Text variant="headlineSmall" style={{ fontWeight: "bold", textAlign: "center" }}>Filter games according to your preferences</Text>
                     <View>
                         {filters.map((filter, index) => (
-                            <View key={index.toString()} style={{ flexDirection: "row", alignItems: "baseline" }}>
-                                <Checkbox status={checked.includes(filter) ? "checked" : "unchecked"}
+                            <View key={index.toString()} style={{ flexDirection: "row", alignItems: "center" }}>
+                                <Checkbox.Android
+                                    color="#f04040"
+                                    uncheckedColor="#f04040"
+                                    status={checked.includes(filter) ? "checked" : "unchecked"}
                                     onPress={() =>
                                         handleCheckChange(filter, checked.includes(filter))
                                     } key={index} />
