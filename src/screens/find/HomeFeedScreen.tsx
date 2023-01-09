@@ -7,6 +7,7 @@ import { Text } from 'react-native-paper';
 import Filter from '../../components/Filter';
 import { useSelector } from 'react-redux';
 import { MainAppState } from '../../models/states';
+import { primaryColor } from '../../utils/colors';
 
 const HomeFeedScreen = ({ navigation }: any) => {
     const [isActiveFilter, setIsActiveFilter] = useState(false);
@@ -29,7 +30,7 @@ const HomeFeedScreen = ({ navigation }: any) => {
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <Text variant="headlineMedium" style={{ fontWeight: "bold", marginBottom: 15 }}>Games near you</Text>
                     <TouchableOpacity onPress={() => setIsActiveFilter(!isActiveFilter)}>
-                        <Ionicons name="funnel" size={24} color="purple" />
+                        <Ionicons name="funnel" size={24} color={primaryColor} />
                     </TouchableOpacity>
                 </View>
                 {homeFeedMockData.map((item) => (

@@ -5,7 +5,7 @@ import { Divider, Text } from 'react-native-paper';
 const StoreListing = ({ item }: any) => {
     return (
         <View
-            style={{ borderBottomWidth: 1, paddingVertical: 6 }}
+            style={{ paddingVertical: 6 }}
         >
             <View
                 style={{ margin: 3, justifyContent: "space-between" }}

@@ -17,7 +17,7 @@ const LogoAnim = () => {
                 style={{
                     width: 200,
                     height: 200,
-                    backgroundColor: '#eee',
+                    backgroundColor: 'transparent',
                 }}
                 // Find more Lottie files at https://lottiefiles.com/featured
                 source={require('../../assets/ludu_logo_anim.json')}

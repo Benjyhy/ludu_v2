@@ -5,6 +5,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Calendar } from "react-native-calendars";
 import moment from "moment";
 import findRoutes from "../../navigation/appRoutes/findRoutes";
+import { primaryColor } from "../../utils/colors";
 
 function DatePickerScreen({ route, navigation }: any) {
     const format = moment(new Date()).format('YYYY-MM-DD');
@@ -58,7 +59,7 @@ function DatePickerScreen({ route, navigation }: any) {
                 </View>
             </View>
             <Button
-                buttonColor="#f04040"
+                buttonColor={primaryColor}
                 textColor="white"
                 style={[styles.btn]}
                 onPress={() =>

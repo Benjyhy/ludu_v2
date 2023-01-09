@@ -7,6 +7,7 @@ import GameScreen from "../screens/find/GameScreen";
 import BookingGameScreen from "../screens/find/BookingGameScreen";
 import DatePickerScreen from "../screens/find/DatePickerScreen";
 import PeriodScreen from "../screens/find/PeriodScreen";
+import BookingConfirmationScreen from "../screens/find/BookingConfirmationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const FindStack = () => {
                 component={DatePickerScreen}
             />
             <Stack.Screen name={findRoutes.PERIOD_FEED} component={PeriodScreen} />
+            <Stack.Screen name={findRoutes.BOOKING_CONFIRMATION} component={BookingConfirmationScreen} />
         </Stack.Navigator>
     );
 };

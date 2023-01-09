@@ -3,6 +3,7 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text, Checkbox, SegmentedButtons, Button } from 'react-native-paper';
 import findRoutes from "../../navigation/appRoutes/findRoutes";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { primaryColor } from "../../utils/colors";
 
 function PeriodScreen({ route, navigation }: any) {
 
@@ -25,9 +26,8 @@ function PeriodScreen({ route, navigation }: any) {
     }
     const handleNavigation = () => {
         isSelected
-            ? navigation.navigate(findRoutes.BOOKING_FEED, {
-                game: game,
-                date: date,
+            ? navigation.navigate(findRoutes.BOOKING_CONFIRMATION, {
+                game: game
             })
             : navigation.goBack();
     }
@@ -50,8 +50,8 @@ function PeriodScreen({ route, navigation }: any) {
                     <Text variant="titleMedium">Bring me the game home</Text>
                     <Checkbox.Android
                         status={isSelected ? 'checked' : 'unchecked'}
-                        color="#f04040"
-                        uncheckedColor="#f04040"
+                        color={primaryColor}
+                        uncheckedColor={primaryColor}
                         onPress={() => {
                             setSelection(!isSelected);
                         }}
@@ -93,7 +93,7 @@ function PeriodScreen({ route, navigation }: any) {
                 </View>}
             <Button
                 style={[styles.btn]}
-                buttonColor="#f04040"
+                buttonColor={primaryColor}
                 textColor="white"
                 onPress={() => handleNavigation()}
             >

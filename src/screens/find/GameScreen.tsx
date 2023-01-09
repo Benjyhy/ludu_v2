@@ -9,6 +9,7 @@ import { View, ScrollView, SafeAreaView, Image } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Tag from '../../components/Tag';
 import findRoutes from '../../navigation/appRoutes/findRoutes';
+import { primaryColor } from '../../utils/colors';
 
 const GameScreen = ({ route, navigation }: any) => {
     const game = gameData.find((game) => game.id === route.params.item.id);
@@ -88,11 +89,11 @@ const GameScreen = ({ route, navigation }: any) => {
                 <View
                     style={{ flexDirection: "row", marginBottom: 4, width: "100%", justifyContent: "space-around", }}
                 >
-                    <TouchableOpacity onPress={() => navigation.navigate(findRoutes.DATEPICKER_FEED, { game: game })}>
+                    <TouchableOpacity onPress={() => navigation.navigate(findRoutes.BOOKING_FEED, { game: game })}>
                         <InlineTextIcon icon={'book'} text={'Book'} background={'lightGrey'} btnMode={true} outline={true} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => console.log('Play now')}>
-                        <InlineTextIcon icon={'happy'} text={'Play now'} background={"#f04040"} btnMode={true} iconColor={"white"} />
+                        <InlineTextIcon icon={'happy'} text={'Play now'} background={primaryColor} btnMode={true} iconColor={"white"} />
                     </TouchableOpacity>
                 </View>
                 <Divider style={{ marginVertical: 15 }} />
