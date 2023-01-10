@@ -4,11 +4,12 @@ import {
     StyleSheet,
     Dimensions,
     Text,
-    TouchableOpacity,
+    Image
 } from 'react-native';
 import appRoutes from '../navigation/appRoutes/index';
+import { LinearGradient } from 'expo-linear-gradient';
 import { TextInput, Button, ActivityIndicator, MD2Colors } from 'react-native-paper';
-import { errorColor, primaryColor } from '../utils/colors';
+import { errorColor, primaryColor, secondaryColor } from '../utils/colors';
 import axios from '../utils/axios';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/actions/userAction';
@@ -44,59 +45,63 @@ export default function Login({ navigation }: any) {
     };
 
     return (
-        <View style={styles.container}>
-            {!loading && (
-                <>
-                    <TextInput
-                        value={usernameInput}
-                        style={styles.input}
-                        label="Email"
-                        placeholderTextColor="gray"
-                        onChangeText={(text) => {
-                            setUsernameInput(text);
-                        }}
-                    />
-                    <TextInput
-                        value={password}
-                        style={styles.input}
-                        label="Password"
-                        placeholderTextColor="gray"
-                        secureTextEntry
-                        onChangeText={(text) => {
-                            setPassword(text);
-                        }}
-                    />
-                    <Button onPress={login} buttonColor={primaryColor}>Login</Button>
-                    <View style={{ marginVertical: 4 }}>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate(appRoutes.REGISTER_SCREEN)}
-                        >
-                            <Text style={styles.registerTextStyle}>Create an account</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ justifyContent: "center", alignItems: "center" }}>
-                        {error && (
-                            <>
-                                <Text style={{ color: errorColor }}>Wrong credentials</Text>
-                            </>
-                        )}
-                    </View>
-                </>
-            )}
-            {loading && (
-                <>
-                    <ActivityIndicator animating={true} color={MD2Colors.amber400} />
-                </>
-            )}
+
+        <View >
+            <LinearGradient colors={[primaryColor, secondaryColor]} style={styles.container}>
+                {!loading && (
+                    <>
+                        <Image style={styles.logo} source={require('../../assets/ludu_logo.png')} />
+                        <View>
+                            <TextInput
+                                value={usernameInput}
+                                style={styles.input}
+                                label="Email"
+                                placeholderTextColor="gray"
+                                underlineColor='transparent'
+                                onChangeText={(text) => {
+                                    setUsernameInput(text);
+                                }}
+                            />
+                            <TextInput
+                                value={password}
+                                style={styles.input}
+                                label="Password"
+                                placeholderTextColor="gray"
+                                underlineColor='transparent'
+                                secureTextEntry
+                                onChangeText={(text) => {
+                                    setPassword(text);
+                                }}
+                            />
+                        </View>
+                        <View style={{ position: "absolute", bottom: 100 }}>
+                            <Button onPress={login} buttonColor={primaryColor} textColor="white" style={{ borderRadius: 5, paddingHorizontal: 15 }}>Login</Button>
+                            <Button onPress={() => navigation.navigate(appRoutes.REGISTER_SCREEN)} mode="text" textColor='black'>Create an account</Button>
+                        </View>
+                        <View style={{ justifyContent: "center", alignItems: "center" }}>
+                            {error && (
+                                <>
+                                    <Text style={{ color: errorColor }}>Wrong credentials</Text>
+                                </>
+                            )}
+                        </View>
+                    </>
+                )}
+                {loading && (
+                    <>
+                        <ActivityIndicator animating={true} color={MD2Colors.amber400} />
+                    </>
+                )}
+            </LinearGradient>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        height: "100%"
     },
     input: {
         width: ScreenWidth * 0.8,
@@ -121,4 +126,17 @@ const styles = StyleSheet.create({
     registerTextStyle: {
         color: '#acabb0',
     },
+    logo: {
+        width: 150,
+        height: 150,
+        position: "absolute",
+        top: 100,
+        shadowColor: '#383838',
+        shadowOffset: {
+            width: 2,
+            height: 3,
+        },
+        shadowOpacity: 0.4,
+        shadowRadius: 1.7,
+    }
 });
